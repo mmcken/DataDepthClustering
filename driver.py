@@ -29,8 +29,8 @@ if len(sys.argv) < 5:
 # Read the input file
 points = []
 ground_truth = []
-path = "Datasets/"
-with open(path + sys.argv[1], 'r') as infile:
+
+with open(sys.argv[1], 'r') as infile:
     infile.readline() # Skip the header
 
     for line in infile:
