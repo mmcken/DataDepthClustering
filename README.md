@@ -6,7 +6,7 @@ Code for clustering using DBSCAN with data depth statistics
 
 This repository contains code for experiments and images reported in the paper in the following paper:
 
-`McKenney, M.; Tucek, D., 
+`McKenney, M.; Tucek, D.; 
 Statistical Depth Measures in
 Density-Based Clustering with
 Automatic Adjustment for Skewed
@@ -20,7 +20,7 @@ The paper explores density-based clustering using DBSCAN with statistical data d
 
 `driver.py` is the executable to run the DBSCAN algorithm with the various distance values.  `Depth_DBSCAN.py` contains the depth value calculations. Run `driver.py` with no arguments for usage instruction.  An example execution using Mahalanobis Distance on the St. Louis bridges data set is: 
 
-`python driver.py st_louis_bridges.txt m 3 .98 .8'
+`python driver.py st_louis_bridges.txt m 3 .98 .8`
 
 `hd.py` performs HDBSCAN on a data file.  Run with no arguments for usage
 
