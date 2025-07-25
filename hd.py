@@ -1,14 +1,14 @@
-#HDBSCAN Implementation 
+#HDBSCAN Implementation using library hdbscan
 
 import sys
 import hdbscan
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.datasets import make_moons
 
 # read the data file
-if len(sys.argv) < 2:
-    print( 'Usage: exe [inputFile] [minimum cluster size] ')
+if len(sys.argv) < 3:
+    print(sys.argv)
+    print( 'Usage: exe [inputFile] [minimum cluster size] [*optional* minimum neighbors needed to create a core point (default is 3)] ')
     exit()
 
 # Read the input file
@@ -26,21 +26,23 @@ with open(sys.argv[1], 'r') as infile:
         nums = [float(i) for i in nums]
 
         points.append(tuple(nums[: -1]))
-        #points.append((float(nums[0]), float(nums[1])))
         ground_truth.append(int(nums[-1]))
 
 # Input Parameters
 try:
     minPts = int(sys.argv[2])
+    min_samples = 3  # Default value for min_samples
+    if len(sys.argv) >= 4:
+        min_samples = int(sys.argv[3])
 except (ValueError, IndexError):
-    print("Invalid Input: distance (mahalanobis/projection), minPts (int), theta (float), and phi (float)")
-    print("Usage: exe [inputFile] [distance] [minimum points] [theta] [phi (only for m)]")
+    print("Error processing input parameters.")
+    print( 'Usage: exe [inputFile] [minimum cluster size] [*optional* minimum neighbors needed to create a core point (default is 3)] ')
     exit()
 
 
 # Initialize and fit the HDBSCAN model
 # note if not using the Roadway data set,  you need to adjust the min_samples parameter (or jsut remove it)
-clusterer = hdbscan.HDBSCAN(min_cluster_size=minPts, min_samples=3)
+clusterer = hdbscan.HDBSCAN(min_cluster_size=minPts, min_samples=min_samples)
 X = np.array( points)
 
 clusterer.fit(X)

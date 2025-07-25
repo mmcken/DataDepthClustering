@@ -3,7 +3,7 @@ import folium
 import matplotlib.pyplot as plt
 
 # Load the dataset
-df = pd.read_csv("stloiusbridges.csv")
+df = pd.read_csv("stlouisbridges.csv")
 df["LATDD"] = df["LATDD"]+0
 indexesToDrop = df[df["LATDD"] > 40].index
 df.drop(indexesToDrop, inplace=True)

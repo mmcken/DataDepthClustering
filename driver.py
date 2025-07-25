@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-from coclust.evaluation.external import accuracy # altered to use linear_sum_assignment instead of linear_assignment because of deprecation warning
-from pyitlib import discrete_random_variable as drv
-from sklearn import metrics
+#from coclust.evaluation.external import accuracy # altered to use linear_sum_assignment instead of linear_assignment because of deprecation warning
+#from pyitlib import discrete_random_variable as drv
+#from sklearn import metrics
 
 from depth_DBSCAN import *
 
@@ -23,7 +23,11 @@ def reorder(points, ground_truth, new_order, results):
     return new_result
 
 if len(sys.argv) < 5:
-    print( 'Usage: exe [inputFile] [distance] [minimum points] [theta] [phi (only for m)]')
+    print( 'Usage: exe [inputFile] [distance] [minimum points] [theta] [phi (only for mahalonobis distance)]')
+    print("* Distance options: mahalanobis (m), projection (p), euclidean (e)")
+    print("* For mahalanobis distance, phi is required to run the local cluster re-scan. a higher phi value will result in more clusters being re-scanned, and possibly more clusters forming under the presence of dimensional skew.")
+    print("* Theta is the traditional DBSCAN epsilon value, and is the threshold for how far apart points can be to be considered neighbors.")
+    print("* For Mahalanobis distance, and Projection distance, it is the depth value indicateing how close points must be to be considered neighbors. It is a value between 0 and 1, with higher values indicating closer points.")
     exit()
 
 # Read the input file
@@ -144,4 +148,4 @@ if len(noise) > 0:
 
 plt.scatter(plot[:, 0], plot[:, 1], s=20, c=plot[:, -1], cmap='tab20', linewidths=0.3, edgecolors='k')
 plt.show()
-print( plot[:, -1])
+#print( plot[:, -1])
